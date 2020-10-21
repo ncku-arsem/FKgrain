@@ -94,7 +94,7 @@ namespace FKgrain
             Overlay = overlay;
             PictureBox1.Image = OriImage;
             PictureBox1.SetZoomScale(0.667 * 0.667, new Point(0, 0));
-            Size = new Size(700, 700);
+            Size = new Size(1000, 1000);
             StartPosition = FormStartPosition.Manual;
             p.Y += 150;
             Location = p;
@@ -259,8 +259,6 @@ namespace FKgrain
 
         private void RefreshPictureBoxSize()
         {
-            //PictureBox1.Size = new Size(Size.Width -20 , Size.Height -50);
-            groupBox2.Size = new Size(Size.Width - 20 - 240, Size.Height - 80);
             PictureBox1.SetBounds(groupBox2.Location.X, groupBox2.Location.Y, groupBox2.Size.Width - 20, groupBox2.Size.Height - 20);
         }
 

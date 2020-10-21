@@ -84,6 +84,7 @@
             this.Controls.Add(this.krigging);
             this.Controls.Add(this.VGM);
             this.Controls.Add(this.detrend);
+            this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ProgressForm";
             this.Text = "Zero-Level Contour Progress";
