@@ -75,9 +75,9 @@
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox4);
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(687, 4);
+            this.groupBox1.Location = new System.Drawing.Point(672, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(285, 945);
+            this.groupBox1.Size = new System.Drawing.Size(300, 945);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
@@ -89,7 +89,7 @@
             this.groupBox5.Controls.Add(this.button11);
             this.groupBox5.Location = new System.Drawing.Point(6, 415);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(268, 287);
+            this.groupBox5.Size = new System.Drawing.Size(288, 287);
             this.groupBox5.TabIndex = 20;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Logs";
@@ -100,7 +100,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.Location = new System.Drawing.Point(57, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(211, 30);
+            this.label3.Size = new System.Drawing.Size(231, 30);
             this.label3.TabIndex = 16;
             this.label3.Text = "label3";
             this.label3.Click += new System.EventHandler(this.label3_Click);
@@ -116,7 +116,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBox1.Size = new System.Drawing.Size(256, 162);
+            this.richTextBox1.Size = new System.Drawing.Size(276, 162);
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "";
             // 
@@ -125,7 +125,7 @@
             this.button10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button10.Location = new System.Drawing.Point(6, 204);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(123, 77);
+            this.button10.Size = new System.Drawing.Size(120, 77);
             this.button10.TabIndex = 10;
             this.button10.Text = "Save Logs";
             this.button10.UseVisualStyleBackColor = true;
@@ -136,11 +136,11 @@
             this.button11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button11.AutoSize = true;
             this.button11.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button11.Location = new System.Drawing.Point(135, 204);
-            this.button11.MaximumSize = new System.Drawing.Size(135, 77);
+            this.button11.Location = new System.Drawing.Point(132, 204);
+            this.button11.MaximumSize = new System.Drawing.Size(150, 77);
             this.button11.MinimumSize = new System.Drawing.Size(123, 77);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(130, 77);
+            this.button11.Size = new System.Drawing.Size(150, 77);
             this.button11.TabIndex = 11;
             this.button11.Text = "Restore Log \r\nand Apply";
             this.button11.UseVisualStyleBackColor = true;
@@ -176,7 +176,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.done_Button.Location = new System.Drawing.Point(6, 893);
             this.done_Button.Name = "done_Button";
-            this.done_Button.Size = new System.Drawing.Size(267, 46);
+            this.done_Button.Size = new System.Drawing.Size(288, 46);
             this.done_Button.TabIndex = 9;
             this.done_Button.Text = "Enter Stage 2";
             this.done_Button.UseVisualStyleBackColor = true;
@@ -197,7 +197,7 @@
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Location = new System.Drawing.Point(6, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(273, 100);
+            this.groupBox3.Size = new System.Drawing.Size(288, 100);
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Note: ";
@@ -223,7 +223,7 @@
             this.groupBox4.Controls.Add(this.button6);
             this.groupBox4.Location = new System.Drawing.Point(6, 150);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(268, 215);
+            this.groupBox4.Size = new System.Drawing.Size(288, 215);
             this.groupBox4.TabIndex = 19;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Controls";
@@ -240,7 +240,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(142, 27);
+            this.button2.Location = new System.Drawing.Point(162, 27);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(120, 40);
             this.button2.TabIndex = 1;
@@ -250,7 +250,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(142, 73);
+            this.button4.Location = new System.Drawing.Point(162, 73);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(120, 40);
             this.button4.TabIndex = 3;
@@ -282,7 +282,7 @@
             // button9
             // 
             this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button9.Location = new System.Drawing.Point(142, 165);
+            this.button9.Location = new System.Drawing.Point(162, 165);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(120, 40);
             this.button9.TabIndex = 7;
@@ -292,7 +292,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(142, 119);
+            this.button6.Location = new System.Drawing.Point(162, 119);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(120, 40);
             this.button6.TabIndex = 5;
@@ -307,7 +307,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(669, 937);
+            this.groupBox2.Size = new System.Drawing.Size(654, 937);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             // 
