@@ -151,7 +151,7 @@
             // 
             this.kriggingToolStripMenuItem.Name = "kriggingToolStripMenuItem";
             this.kriggingToolStripMenuItem.Size = new System.Drawing.Size(274, 34);
-            this.kriggingToolStripMenuItem.Text = "Krigging";
+            this.kriggingToolStripMenuItem.Text = "Kriging";
             this.kriggingToolStripMenuItem.Click += new System.EventHandler(this.kriggingToolStripMenuItem_Click);
             // 
             // zeroContourToolStripMenuItem2
