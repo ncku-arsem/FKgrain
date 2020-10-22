@@ -323,7 +323,7 @@ namespace FKgrain {
         private void zeroContourToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             openFileDialog1.Title = "Pick an zero contour image";
-            openFileDialog1.Filter = "bmp files (*.bmp)|*.bmp|All files (*.*)|*.*";
+            openFileDialog1.Filter = "tif files (*.tif)|*.tif|All files (*.*)|*.*";
             string openfile;
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {

@@ -131,7 +131,7 @@
             this.zeroContourToolStripMenuItem2});
             this.visualizeToolToolStripMenuItem.Name = "visualizeToolToolStripMenuItem";
             this.visualizeToolToolStripMenuItem.Size = new System.Drawing.Size(331, 34);
-            this.visualizeToolToolStripMenuItem.Text = "Visualize Tool";
+            this.visualizeToolToolStripMenuItem.Text = "Visualization Tool";
             // 
             // dSMToolStripMenuItem
             // 

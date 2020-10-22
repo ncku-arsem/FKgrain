@@ -200,6 +200,17 @@ namespace FKgrain.UI
             });
             worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler((ss, ee) =>
             {
+                string filename = Path.GetFileName(Path.ChangeExtension(DSMPath, ".tif"));
+                if (File.Exists(Path.Combine(outPath, filename)))
+                {
+                    File.Delete(Path.Combine(outPath, filename));
+                }
+                File.Move(Path.ChangeExtension(DSMPath, ".tif"), Path.Combine(outPath, filename));
+                if (File.Exists(Path.Combine(outPath, Path.ChangeExtension(filename,".tfw"))))
+                {
+                    File.Delete(Path.Combine(outPath, Path.ChangeExtension(filename, ".tfw")));
+                }
+                File.Move(Path.ChangeExtension(DSMPath, ".tfw"), Path.Combine(outPath, Path.ChangeExtension(filename, ".tfw")));
                 this.Invoke((MethodInvoker)delegate
                 {
                     Bitmap zero;
