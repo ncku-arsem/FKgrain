@@ -281,7 +281,7 @@ namespace FKgrain.UI
             string path = combine.SaveResult(tfwPath);
             if (path != "")
             {
-                label1.Text = "Saved\n" + path;
+                label1.Text = "Saved\n " + path;
             }
         }
         private int oriflowLocation = 21;

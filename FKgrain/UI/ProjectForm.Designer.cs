@@ -35,9 +35,9 @@
             this.flowbox = new System.Windows.Forms.FlowLayoutPanel();
             this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.SieveMaster_box = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.finishProject_btn = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.label1 = new System.Windows.Forms.RichTextBox();
             this.groupBox5.SuspendLayout();
             this.SieveMaster_box.SuspendLayout();
             this.SuspendLayout();
@@ -112,17 +112,6 @@
             this.SieveMaster_box.Text = "Stage 2";
             this.SieveMaster_box.Visible = false;
             // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.AutoEllipsis = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 524);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(228, 45);
-            this.label1.TabIndex = 6;
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // finishProject_btn
             // 
             this.finishProject_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -135,13 +124,26 @@
             this.finishProject_btn.UseVisualStyleBackColor = true;
             this.finishProject_btn.Click += new System.EventHandler(this.finishProject_btn_Click);
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.BackColor = System.Drawing.SystemColors.Control;
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.label1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(18, 521);
+            this.label1.Name = "label1";
+            this.label1.ReadOnly = true;
+            this.label1.Size = new System.Drawing.Size(226, 45);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "asdasdasdasdasdasdasdasdasdsadasyifdgdifygdsifugsiuvfdghsiufsdhifudshf";
+            // 
             // ProjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(360, 578);
-            this.Controls.Add(this.finishProject_btn);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.finishProject_btn);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.SieveMaster_box);
             this.Name = "ProjectForm";
@@ -162,7 +164,7 @@
         private System.Windows.Forms.GroupBox SieveMaster_box;
         private System.Windows.Forms.Button finishProject_btn;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.VScrollBar vScrollBar1;
+        private System.Windows.Forms.RichTextBox label1;
     }
 }
