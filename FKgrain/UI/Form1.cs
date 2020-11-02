@@ -333,6 +333,7 @@ namespace FKgrain {
             {
                 return;
             }
+
             ExtraProgram.OpenPreviewForm(new Bitmap(openfile), "Zero-Level Contour");
         }
 
@@ -340,6 +341,36 @@ namespace FKgrain {
         {
             var project = new UI.ProjectForm();
             project.Show();
+        }
+
+        private void generateEllipsoidToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // open file
+            openFileDialog1.Title = "Pick an boundary shape file";
+            openFileDialog1.Filter = "shape files (*.shp)|*.shp|All files (*.*)|*.*";
+            openFileDialog1.FileName = "";
+            string openfile,savefile;
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                openfile = openFileDialog1.FileName;
+            }
+            else
+            {
+                return;
+            }
+            saveFileDialog1.Title = "Save Ellipse shape file";
+            saveFileDialog1.Filter = "shape files (*.shp)|*.shp|All files (*.*)|*.*";
+            saveFileDialog1.FileName = "";
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                savefile = saveFileDialog1.FileName;
+            }
+            else
+            {
+                return;
+            }
+            // send to go to create csv
+            ExtraProgram.BoundaryShapeToEllipse(openfile, savefile);
         }
     }
 }

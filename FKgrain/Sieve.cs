@@ -246,6 +246,7 @@ namespace FKgrain
                 NextSieve.InitiateSieve(smaller, threshold);
                 NextSieve.DisableSieve();
                 NextSieve.EnableSieve();
+                Project.finishProject_btn.Enabled = true;
             }
         }
         private Bitmap StartCount(Bitmap image)
@@ -312,7 +313,7 @@ namespace FKgrain
                         gr.DrawEllipse(thick_pen, rect);
                         gr.RotateTransform((float)-theta);
                         gr.TranslateTransform(-dx, -dy);
-                        output.Add(String.Format("{0},{1},{2},{3},{4}", Math.Round(elarr[i, 1],6), Math.Round(elarr[i,0], 6), dx, dy-1, theta));
+                        output.Add(String.Format("{0},{1},{2},{3},{4}", Math.Round(elarr[i, 1],6), Math.Round(elarr[i,0], 6), dx, dy, theta));
                     }
                 }
             }

@@ -8,13 +8,14 @@ using System.Drawing.Imaging;
 using MathWorks.MATLAB.NET.Arrays;
 using System.Drawing;
 using FKgrain.UI;
+using System.Collections.Generic;
 
 namespace FKgrain
 {
     static class ExtraProgram
     {
         public static Encoding encoding = new UTF8Encoding(false);
-        public static System.Diagnostics.ProcessWindowStyle windowstyle =  System.Diagnostics.ProcessWindowStyle.Hidden;
+        public static System.Diagnostics.ProcessWindowStyle windowstyle = System.Diagnostics.ProcessWindowStyle.Normal;
         public static void DoAll(string DSMPath, string ImageOutPath, Label label)
         {
             string DetrendFileName = "DetrendedDEM.txt";
@@ -36,21 +37,22 @@ namespace FKgrain
                  //Facotorial
                  CreateParFile(DetrendFileName, FactorialResult, VGMModelFile, TemplateFilePath, ParFilePath, la);
                  SetupHeaderForKriging(DetrendingDSMPath);
-                 FactorialKrigging(la, FactorialResultPath, true,(l) =>
-                    {
-                        GenerateSHPContour(FactorialResultPath, ImageOutPath,l, () => {
-                            Bitmap zero = new Bitmap(Path.ChangeExtension(ImageOutPath,".tif"));
-                            ExtraProgram.OpenPreviewForm(zero, "Zero-Level Contour");
-                            File.Copy(DetrendingDSMPath,Path.Combine(outPath,$"{outPrefix}_{DetrendFileName}"));
-                            File.Copy(VGMFile, Path.Combine(outPath,$"{outPrefix}_VGM.txt"));
-                            File.Copy(VGMModelFile, Path.Combine(outPath,$"{outPrefix}_VGM_Model.txt"));
-                            File.Copy(FactorialResultPath, Path.Combine(outPath,$"{outPrefix}_{FactorialResult}"));
-                        });
-                    });
+                 FactorialKrigging(la, FactorialResultPath, true, (l) =>
+                     {
+                         GenerateSHPContour(FactorialResultPath, ImageOutPath, l, () =>
+                         {
+                             Bitmap zero = new Bitmap(Path.ChangeExtension(ImageOutPath, ".tif"));
+                             ExtraProgram.OpenPreviewForm(zero, "Zero-Level Contour");
+                             File.Copy(DetrendingDSMPath, Path.Combine(outPath, $"{outPrefix}_{DetrendFileName}"));
+                             File.Copy(VGMFile, Path.Combine(outPath, $"{outPrefix}_VGM.txt"));
+                             File.Copy(VGMModelFile, Path.Combine(outPath, $"{outPrefix}_VGM_Model.txt"));
+                             File.Copy(FactorialResultPath, Path.Combine(outPath, $"{outPrefix}_{FactorialResult}"));
+                         });
+                     });
              });
         }
 
-        public static void SetupHeaderForKriging(string filePath,string outpath = "")
+        public static void SetupHeaderForKriging(string filePath, string outpath = "")
         {
             if (string.IsNullOrEmpty(outpath))
             {
@@ -68,7 +70,7 @@ namespace FKgrain
             }
         }
 
-        public static void ReformatKriggingResult(string openfile,string savepath)
+        public static void ReformatKriggingResult(string openfile, string savepath)
         {
             string[] krigResult = File.ReadAllLines(openfile, encoding);
             int columenum = int.Parse(krigResult[1]);
@@ -92,7 +94,7 @@ namespace FKgrain
                 diff = Math.Abs(ex - float.Parse(colume[1]));
                 xsize = (int)((ex - sx) / diff) + 1;
                 ysize = (int)((ey - sy) / diff) + 1;
-               
+
             }
             for (int i = 2 + columenum; i < krigResult.Length; i++)
             {
@@ -106,7 +108,7 @@ namespace FKgrain
                 int yindex = (int)((y - sy) / diff);
                 sb.AppendFormat("{0}\t{1}\t{2}\n", x, y, z);
             }
-            File.WriteAllText(savepath,sb.ToString(), encoding);
+            File.WriteAllText(savepath, sb.ToString(), encoding);
         }
 
         public static Bitmap GenerateContour(string path)
@@ -134,7 +136,7 @@ namespace FKgrain
                 diff = Math.Abs(ex - float.Parse(colume[1]));
                 xsize = (int)((ex - sx) / diff) + 1;
                 ysize = (int)((ey - sy) / diff) + 1;
-                Z = new float[xsize,ysize];
+                Z = new float[xsize, ysize];
             }
             for (int i = 2 + columenum; i < krigResult.Length; i++)
             {
@@ -173,13 +175,13 @@ namespace FKgrain
                 int y = coordinates[i, 0];
                 if (x < xsize && y < ysize)
                 {
-                    bi[x, ysize-y-1] = false;
+                    bi[x, ysize - y - 1] = false;
                 }
             }
             return PImage.NetArray2Bitmap(bi, PixelFormat.Format24bppRgb);
         }
 
-        public static void SaveResultTiff(string dem, string detrenddem,string fk)
+        public static void SaveResultTiff(string dem, string detrenddem, string fk)
         {
             BackgroundWorker backgroundWorker1 = new BackgroundWorker();
             backgroundWorker1.DoWork += new DoWorkEventHandler((s, ee) =>
@@ -187,7 +189,7 @@ namespace FKgrain
                 string strCmdText;
                 string path = Directory.GetCurrentDirectory();
                 string exe_path = Path.Combine(path, "DrawTiff", "main.exe");
-                strCmdText = String.Format("/c {3} --fk={0} --dem={1} --detrenddem={2}", fk, dem, detrenddem,  exe_path);
+                strCmdText = String.Format("/c {3} --fk={0} --dem={1} --detrenddem={2}", fk, dem, detrenddem, exe_path);
                 System.Diagnostics.Process process = new System.Diagnostics.Process();
                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                 startInfo.WindowStyle = windowstyle;
@@ -313,7 +315,7 @@ namespace FKgrain
                 Thread.Sleep(100);
             }
         }
-                
+
         public static void OpenPreviewForm(Bitmap image, string title = "Preview Image")
         {
             UI.ImagePreview form = new UI.ImagePreview();
@@ -432,13 +434,13 @@ namespace FKgrain
             }
         }
 
-        public static void VGM(string openfile, string savefile,string modelfile, Label label, Action<Label> onDone = null)
+        public static void VGM(string openfile, string savefile, string modelfile, Label label, Action<Label> onDone = null)
         {
             BackgroundWorker backgroundWorker1 = new BackgroundWorker();
             backgroundWorker1.DoWork += new DoWorkEventHandler((s, ee) =>
             {
                 string strCmdText;
-                strCmdText = "/c Rscript --vanilla ./vgm/ho1vgm.r " + openfile + " " + savefile+" "+ modelfile;
+                strCmdText = "/c Rscript --vanilla ./vgm/ho1vgm.r " + openfile + " " + savefile + " " + modelfile;
                 System.Diagnostics.Process process = new System.Diagnostics.Process();
                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                 startInfo.WindowStyle = windowstyle;
@@ -454,7 +456,7 @@ namespace FKgrain
             });
             backgroundWorker1.RunWorkerCompleted += new RunWorkerCompletedEventHandler((a, ee) =>
             {
-               
+
                 if (onDone != null)
                 {
                     onDone(label);
@@ -485,7 +487,7 @@ namespace FKgrain
                 diff = Math.Abs(sy - float.Parse(colume[1]));
                 xsize = (int)((ex - sx) / diff) + 1;
                 ysize = (int)((ey - sy) / diff) + 1;
-                Z = new float[xsize+2,ysize+2];
+                Z = new float[xsize + 2, ysize + 2];
             }
             float maxz = float.MinValue;
             float minz = float.MaxValue;
@@ -497,8 +499,8 @@ namespace FKgrain
                 float z = float.Parse(colume[2]);
                 int xindex = (int)((x - sx) / diff);
                 int yindex = (int)((y - sy) / diff);
-                Z[xindex,yindex] = z;
-               
+                Z[xindex, yindex] = z;
+
                 maxz = Math.Max(z, maxz);
                 minz = Math.Min(z, minz);
             }
@@ -508,7 +510,7 @@ namespace FKgrain
             {
                 for (int j = 0; j < ysize; j++)
                 {
-                    bi[i, ysize-j-1] = RampGenerator.HotCold(Z[i,j],maxz,minz);
+                    bi[i, ysize - j - 1] = RampGenerator.HotCold(Z[i, j], maxz, minz);
                 }
             }
             return PImage.NetArray2Bitmap(bi);
@@ -516,14 +518,14 @@ namespace FKgrain
         public static Bitmap DrawDetrendDSM(string name)
         {
             string[] dsm = File.ReadAllLines(name, encoding);
-            if(dsm[0] == "DetrendedDEM")
+            if (dsm[0] == "DetrendedDEM")
             {
                 int col = int.Parse(dsm[1]);
                 string[] copy = dsm;
                 dsm = new string[copy.Length - 2 - col];
-                for(int i =2+col; i< copy.Length; i++)
+                for (int i = 2 + col; i < copy.Length; i++)
                 {
-                    dsm[i - 2-col] = copy[i];
+                    dsm[i - 2 - col] = copy[i];
                 }
             }
             float[,] Z;
@@ -540,7 +542,7 @@ namespace FKgrain
                 diff = Math.Abs(sy - float.Parse(colume[1]));
                 xsize = (int)((ex - sx) / diff) + 1;
                 ysize = (int)((ey - sy) / diff) + 1;
-                Z = new float[xsize+2, ysize+2];
+                Z = new float[xsize + 2, ysize + 2];
             }
             float maxz = float.MinValue;
             float minz = float.MaxValue;
@@ -561,7 +563,7 @@ namespace FKgrain
             {
                 for (int j = 0; j < ysize; j++)
                 {
-                    bi[i, ysize-j-1] = RampGenerator.HotCold(Z[i, j], maxz, minz);
+                    bi[i, ysize - j - 1] = RampGenerator.HotCold(Z[i, j], maxz, minz);
                 }
             }
             return PImage.NetArray2Bitmap(bi);
@@ -628,7 +630,7 @@ namespace FKgrain
                 {
                     for (int j = 0; j < ysize; j++)
                     {
-                        Localbi[i, ysize-j-1] = RampGenerator.HotCold(Local[i, j], maxz, minz);
+                        Localbi[i, ysize - j - 1] = RampGenerator.HotCold(Local[i, j], maxz, minz);
                     }
                 }
                 Color[,] Regionbi = new Color[Region.GetLength(0), Region.GetLength(1)];
@@ -636,7 +638,7 @@ namespace FKgrain
                 {
                     for (int j = 0; j < ysize; j++)
                     {
-                        Regionbi[i, ysize - j-1] = RampGenerator.HotCold(Region[i, j], maxz2, minz2);
+                        Regionbi[i, ysize - j - 1] = RampGenerator.HotCold(Region[i, j], maxz2, minz2);
                     }
                 }
                 Color[,] Combinebi = new Color[Region.GetLength(0), Region.GetLength(1)];
@@ -644,15 +646,94 @@ namespace FKgrain
                 {
                     for (int j = 0; j < ysize; j++)
                     {
-                        Combinebi[i, ysize - j-1] = RampGenerator.HotCold(Region[i, j] + Local[i, j], maxzC, minzC);
+                        Combinebi[i, ysize - j - 1] = RampGenerator.HotCold(Region[i, j] + Local[i, j], maxzC, minzC);
                     }
                 }
-            return new Bitmap[] { PImage.NetArray2Bitmap(Localbi), PImage.NetArray2Bitmap(Regionbi), PImage.NetArray2Bitmap(Combinebi) };
+                return new Bitmap[] { PImage.NetArray2Bitmap(Localbi), PImage.NetArray2Bitmap(Regionbi), PImage.NetArray2Bitmap(Combinebi) };
             }
             catch
             {
                 return null;
             }
+        }
+        public static void BoundaryShapeToEllipse(string boundaryShapePath, string outpath)
+        {
+            string tmpFile = Path.Combine(Directory.GetCurrentDirectory(), "tmpboundary.txt");
+            string tmpellipseFile = Path.Combine(Directory.GetCurrentDirectory(), "tmpellipse.txt");
+
+            string strCmdText;
+            string path = Directory.GetCurrentDirectory();
+            string exe_path = Path.Combine(path, "BoundToEllipse", "main.exe");
+            string command = string.Format("-m=b2csv -shp={0} -out={1}", boundaryShapePath, tmpFile);
+            strCmdText = "/c " + exe_path + " " + command;
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WindowStyle = windowstyle;
+            startInfo.FileName = "cmd.exe";
+            startInfo.UseShellExecute = true;
+            startInfo.Arguments = strCmdText;
+            process.StartInfo = startInfo;
+            process.Start();
+            process.WaitForExit();
+            Thread.Sleep(100);
+
+            while (PImage.init == false)
+            {
+                Thread.Sleep(10);
+            }
+            string[] csv = File.ReadAllLines(tmpFile);
+            List<string> ellipseout = new List<string>();
+            for (int i = 0; i < csv.Length; i++)
+            {
+                List<float> x = new List<float>();
+                List<float> y = new List<float>();
+                int line = int.Parse(csv[i]);
+                for (int j = 0; j < line; j++)
+                {
+                    string[] xy = csv[i + j + 1].Split(',');
+                    x.Add(float.Parse(xy[0]));
+                    y.Add(float.Parse(xy[1]));
+                }
+
+                MWArray xa = new MWNumericArray(x.ToArray());
+                MWArray ya = new MWNumericArray(y.ToArray());
+
+                MWArray res = PImage.processor.EllipseDirectFit(xa, ya);
+                if (res.IsStructArray)
+                {
+                    var a = ((double[,])(((MWStructArray)res).GetField("a", 0).ToArray()))[0, 0];
+                    var b = ((double[,])(((MWStructArray)res).GetField("b", 0).ToArray()))[0, 0];
+                    var phi = ((double[,])(((MWStructArray)res).GetField("phi", 0).ToArray()))[0, 0] * 180 / Math.PI;
+                    var X0 = ((double[,])(((MWStructArray)res).GetField("X0", 0).ToArray()))[0, 0];
+                    var Y0 = ((double[,])(((MWStructArray)res).GetField("Y0", 0).ToArray()))[0, 0];
+                    var X0_in = ((double[,])(((MWStructArray)res).GetField("X0_in", 0).ToArray()))[0, 0];
+                    var Y0_in = ((double[,])(((MWStructArray)res).GetField("Y0_in", 0).ToArray()))[0, 0];
+                    ellipseout.Add(String.Format("{0},{1},{2},{3},{4}", Math.Round(a, 6), Math.Round(b, 6), Math.Round(X0_in, 6), Math.Round(Y0_in, 6), Math.Round(phi, 6)));
+                }
+
+                i += line;
+            }
+            //write ellipsout
+            File.WriteAllLines(tmpellipseFile, ellipseout);
+
+            string strCmdText2;
+            string path2 = Directory.GetCurrentDirectory();
+            string exe_path2 = Path.Combine(path2, "BoundToEllipse", "main.exe");
+            string command2 = string.Format("-m=e2shp -shp={0} -out={1}", tmpellipseFile, outpath);
+            strCmdText2 = "/c " + exe_path2 + " " + command2;
+            System.Diagnostics.Process process2 = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo2 = new System.Diagnostics.ProcessStartInfo();
+            startInfo2.WindowStyle = windowstyle;
+            startInfo2.FileName = "cmd.exe";
+            startInfo2.UseShellExecute = true;
+            startInfo2.Arguments = strCmdText2;
+            process2.StartInfo = startInfo2;
+            process2.Start();
+            process2.WaitForExit();
+
+            File.Delete(tmpFile);
+            File.Delete(tmpellipseFile);
+
         }
     }
 }

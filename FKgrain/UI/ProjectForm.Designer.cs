@@ -115,6 +115,7 @@
             // finishProject_btn
             // 
             this.finishProject_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.finishProject_btn.Enabled = false;
             this.finishProject_btn.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.finishProject_btn.Location = new System.Drawing.Point(250, 524);
             this.finishProject_btn.Name = "finishProject_btn";
@@ -162,9 +163,9 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.FlowLayoutPanel flowbox;
         private System.Windows.Forms.GroupBox SieveMaster_box;
-        private System.Windows.Forms.Button finishProject_btn;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.VScrollBar vScrollBar1;
         private System.Windows.Forms.RichTextBox label1;
+        public System.Windows.Forms.Button finishProject_btn;
     }
 }

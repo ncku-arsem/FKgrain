@@ -41,6 +41,8 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.label1 = new System.Windows.Forms.Label();
+            this.extraToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.generateEllipsoidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,10 +51,11 @@
             this.menuStrip1.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.extraToolStripMenuItem});
+            this.extraToolStripMenuItem,
+            this.extraToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(434, 37);
+            this.menuStrip1.Size = new System.Drawing.Size(434, 41);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -60,7 +63,7 @@
             // 
             this.fileToolStripMenuItem.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(77, 33);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(77, 37);
             this.fileToolStripMenuItem.Text = "Main";
             this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
@@ -72,7 +75,7 @@
             this.visualizeToolToolStripMenuItem});
             this.extraToolStripMenuItem.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.extraToolStripMenuItem.Name = "extraToolStripMenuItem";
-            this.extraToolStripMenuItem.Size = new System.Drawing.Size(48, 33);
+            this.extraToolStripMenuItem.Size = new System.Drawing.Size(48, 37);
             this.extraToolStripMenuItem.Text = "FK";
             // 
             // zerocontourToolStripMenuItem
@@ -177,6 +180,21 @@
             this.label1.Text = "l";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // extraToolStripMenuItem1
+            // 
+            this.extraToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.generateEllipsoidToolStripMenuItem});
+            this.extraToolStripMenuItem1.Name = "extraToolStripMenuItem1";
+            this.extraToolStripMenuItem1.Size = new System.Drawing.Size(82, 37);
+            this.extraToolStripMenuItem1.Text = "Extra";
+            // 
+            // generateEllipsoidToolStripMenuItem
+            // 
+            this.generateEllipsoidToolStripMenuItem.Name = "generateEllipsoidToolStripMenuItem";
+            this.generateEllipsoidToolStripMenuItem.Size = new System.Drawing.Size(531, 38);
+            this.generateEllipsoidToolStripMenuItem.Text = "Generate Ellipse Shp From Boundary Shp";
+            this.generateEllipsoidToolStripMenuItem.Click += new System.EventHandler(this.generateEllipsoidToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -217,6 +235,8 @@
         private System.Windows.Forms.ToolStripMenuItem detrendDSMToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kriggingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zeroContourToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem extraToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem generateEllipsoidToolStripMenuItem;
     }
 }
 
