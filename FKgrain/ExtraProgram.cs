@@ -701,14 +701,21 @@ namespace FKgrain
                 MWArray res = PImage.processor.EllipseDirectFit(xa, ya);
                 if (res.IsStructArray)
                 {
-                    var a = ((double[,])(((MWStructArray)res).GetField("a", 0).ToArray()))[0, 0];
-                    var b = ((double[,])(((MWStructArray)res).GetField("b", 0).ToArray()))[0, 0];
-                    var phi = ((double[,])(((MWStructArray)res).GetField("phi", 0).ToArray()))[0, 0] * 180 / Math.PI;
-                    var X0 = ((double[,])(((MWStructArray)res).GetField("X0", 0).ToArray()))[0, 0];
-                    var Y0 = ((double[,])(((MWStructArray)res).GetField("Y0", 0).ToArray()))[0, 0];
-                    var X0_in = ((double[,])(((MWStructArray)res).GetField("X0_in", 0).ToArray()))[0, 0];
-                    var Y0_in = ((double[,])(((MWStructArray)res).GetField("Y0_in", 0).ToArray()))[0, 0];
-                    ellipseout.Add(String.Format("{0},{1},{2},{3},{4}", Math.Round(a, 6), Math.Round(b, 6), Math.Round(X0_in, 6), Math.Round(Y0_in, 6), Math.Round(phi, 6)));
+                    try
+                    {
+                        var a = ((double[,])(((MWStructArray)res).GetField("a", 0).ToArray()))[0, 0];
+                        var b = ((double[,])(((MWStructArray)res).GetField("b", 0).ToArray()))[0, 0];
+                        var phi = ((double[,])(((MWStructArray)res).GetField("phi", 0).ToArray()))[0, 0] * 180 / Math.PI;
+                        var X0 = ((double[,])(((MWStructArray)res).GetField("X0", 0).ToArray()))[0, 0];
+                        var Y0 = ((double[,])(((MWStructArray)res).GetField("Y0", 0).ToArray()))[0, 0];
+                        var X0_in = ((double[,])(((MWStructArray)res).GetField("X0_in", 0).ToArray()))[0, 0];
+                        var Y0_in = ((double[,])(((MWStructArray)res).GetField("Y0_in", 0).ToArray()))[0, 0];
+                        ellipseout.Add(String.Format("{0},{1},{2},{3},{4}", Math.Round(a, 6), Math.Round(b, 6), Math.Round(X0_in, 6), Math.Round(Y0_in, 6), Math.Round(phi, 6)));
+                    }
+                    catch
+                    {
+
+                    }
                 }
 
                 i += line;
