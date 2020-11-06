@@ -189,7 +189,7 @@ namespace FKgrain
                 string strCmdText;
                 string path = Directory.GetCurrentDirectory();
                 string exe_path = Path.Combine(path, "DrawTiff", "main.exe");
-                strCmdText = String.Format("/c {3} --fk={0} --dem={1} --detrenddem={2}", fk, dem, detrenddem, exe_path);
+                strCmdText = String.Format("/c {3} --fk=\"{0}\" --dem=\"{1}\" --detrenddem=\"{2}\"", fk, dem, detrenddem, exe_path);
                 System.Diagnostics.Process process = new System.Diagnostics.Process();
                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                 startInfo.WindowStyle = windowstyle;
@@ -664,7 +664,7 @@ namespace FKgrain
             string strCmdText;
             string path = Directory.GetCurrentDirectory();
             string exe_path = Path.Combine(path, "BoundToEllipse", "main.exe");
-            string command = string.Format("-m=b2csv -shp={0} -out={1}", boundaryShapePath, tmpFile);
+            string command = string.Format("-m=b2csv -shp=\"{0}\" -out=\"{1}\"", boundaryShapePath, tmpFile);
             strCmdText = "/c " + exe_path + " " + command;
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
@@ -726,7 +726,7 @@ namespace FKgrain
             string strCmdText2;
             string path2 = Directory.GetCurrentDirectory();
             string exe_path2 = Path.Combine(path2, "BoundToEllipse", "main.exe");
-            string command2 = string.Format("-m=e2shp -shp={0} -out={1}", tmpellipseFile, outpath);
+            string command2 = string.Format("-m=e2shp -shp=\"{0}\" -out=\"{1}\"", tmpellipseFile, outpath);
             strCmdText2 = "/c " + exe_path2 + " " + command2;
             System.Diagnostics.Process process2 = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo2 = new System.Diagnostics.ProcessStartInfo();
