@@ -15,7 +15,7 @@ namespace FKgrain
     static class ExtraProgram
     {
         public static Encoding encoding = new UTF8Encoding(false);
-        public static System.Diagnostics.ProcessWindowStyle windowstyle = System.Diagnostics.ProcessWindowStyle.Normal;
+        public static System.Diagnostics.ProcessWindowStyle windowstyle = System.Diagnostics.ProcessWindowStyle.Hidden;
         public static void DoAll(string DSMPath, string ImageOutPath, Label label)
         {
             string DetrendFileName = "DetrendedDEM.txt";
