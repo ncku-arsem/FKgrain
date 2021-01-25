@@ -60,9 +60,9 @@
             this.krigging.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.krigging.Location = new System.Drawing.Point(12, 68);
             this.krigging.Name = "krigging";
-            this.krigging.Size = new System.Drawing.Size(91, 29);
+            this.krigging.Size = new System.Drawing.Size(80, 29);
             this.krigging.TabIndex = 2;
-            this.krigging.Text = "Krigging";
+            this.krigging.Text = "Kriging";
             // 
             // zerocontour
             // 

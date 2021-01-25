@@ -31,8 +31,8 @@ namespace FKgrain.UI
         private void ProgressForm_Load(object sender, EventArgs e)
         {
             detrend.Text = "1. Detrend DEM";
-            VGM.Text = "2. Calculate Variagram Model";
-            krigging.Text = "3. Calculate Krigging Model";
+            VGM.Text = "2. Calculate Variogram Model";
+            krigging.Text = "3. Calculate Kriging Model";
             zerocontour.Text = "4. Generate Zero-Level Contour";
         }
 
@@ -244,23 +244,23 @@ namespace FKgrain.UI
         public void VGM_Done(BackgroundWorker w)
         {
             calVGM = false;
-            SetInOtherThread(VGM, "2. Finish Calculate Variagram Model [Done]");
+            SetInOtherThread(VGM, "2. Finish Calculate Variogram Model [Done]");
         }
         public BackgroundWorker Start_VGM()
         {
             calVGM = true;
-            return StartRunning(VGM, "2. Calculating Variagram Model", () => { return this.calVGM; });
+            return StartRunning(VGM, "2. Calculating Variogram Model", () => { return this.calVGM; });
             //SetInOtherThread(VGM, "2. Calculating Variagram Model...");
         }
         public void Krigging_Done(BackgroundWorker w)
         {
             calFk = false;
-            SetInOtherThread(krigging, "3. Finish Calculate Krigging Model [Done]");
+            SetInOtherThread(krigging, "3. Finish Calculate Kriging Model [Done]");
         }
         public BackgroundWorker Start_Krigging()
         {
             calFk = true;
-            return StartRunning(krigging, "3. Calculating Krigging Model", () => { return this.calFk; });
+            return StartRunning(krigging, "3. Calculating Kriging Model", () => { return this.calFk; });
 
             //SetInOtherThread(krigging, "3. Calculating Krigging Model...");
         }
