@@ -10,7 +10,7 @@ using System.Drawing.Imaging;
 namespace FKgrain {
     public class Step {
 
-        public const string Opening = "Openning"; 
+        public const string Opening = "Opening"; 
         public const string Closing = "Closing";
         public const string Inverse = "Inverse";
         public const string Fill = "Fill";

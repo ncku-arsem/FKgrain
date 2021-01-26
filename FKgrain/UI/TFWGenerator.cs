@@ -19,24 +19,10 @@ namespace FKgrain.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            float x;
-            if (!float.TryParse(topleftX.Text, out x))
-            {
-                MessageBox.Show("Top left X is not a valid number",
-                    "Please insert a valid Number in Top left X",
-                     MessageBoxButtons.OK,
-                     MessageBoxIcon.Information);
-                return;
-            }
-            float y;
-            if (!float.TryParse(topleftY.Text, out y))
-            {
-                MessageBox.Show("Top left Y is not a valid number",
-                 "Please insert a valid Number in Top left Y",
-                  MessageBoxButtons.OK,
-                  MessageBoxIcon.Information);
-                return;
-            }
+            float x = 0;
+            
+            float y = 0;
+          
             float pSize;
             if (!float.TryParse(pixelsize.Text, out pSize))
             {
@@ -46,6 +32,7 @@ namespace FKgrain.UI
                   MessageBoxIcon.Information);
                 return;
             }
+            this.DialogResult = DialogResult.OK;
             this.Close();
             Bitmap b = new Bitmap(ImagePath);
             string extension = Path.GetExtension(ImagePath);
@@ -59,9 +46,5 @@ namespace FKgrain.UI
             File.WriteAllLines(ImagePath.Replace(extension, ".tfw"), tfw);
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

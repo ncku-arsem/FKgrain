@@ -91,7 +91,11 @@ namespace FKgrain.UI
                 if (!File.Exists(Path.ChangeExtension(openfile, ".tfw"))) {
                     TFWGenerator tFWGenerator = new TFWGenerator(Path.ChangeExtension(openfile, ".tif"));
                     tFWGenerator.StartPosition = FormStartPosition.CenterParent;
-                    tFWGenerator.ShowDialog(this);
+                    DialogResult res = tFWGenerator.ShowDialog(this);
+                    if (res != DialogResult.OK)
+                    {
+                        return;
+                    }
                 }
                 OriginalImageFilePath = Path.ChangeExtension(openfile, ".tif");
                 OriginalImage = new Bitmap(OriginalImageFilePath);

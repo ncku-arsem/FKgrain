@@ -2,4 +2,4 @@ Fill,options:Coordinate,x:1,y:1
 Inverse
 Fill,options:holes
 Closing,filter:square,size:7
-Openning,filter:square,size:7
+Opening,filter:square,size:7
