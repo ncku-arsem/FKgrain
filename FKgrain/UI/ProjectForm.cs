@@ -294,5 +294,10 @@ namespace FKgrain.UI
            // label1.Text = vScrollBar1.Value.ToString()  + flowbox.Location.ToString();
             flowbox.Location = new Point(flowbox.Location.X, oriflowLocation - vScrollBar1.Value);
         }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
     }
 }

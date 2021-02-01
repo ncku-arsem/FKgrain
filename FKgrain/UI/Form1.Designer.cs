@@ -37,12 +37,12 @@
             this.detrendDSMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kriggingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zeroContourToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.extraToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.generateEllipsoidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.label1 = new System.Windows.Forms.Label();
-            this.extraToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.generateEllipsoidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -164,22 +164,6 @@
             this.zeroContourToolStripMenuItem2.Text = "Zero-Level Contour";
             this.zeroContourToolStripMenuItem2.Click += new System.EventHandler(this.zeroContourToolStripMenuItem2_Click);
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(261, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(19, 29);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "l";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // extraToolStripMenuItem1
             // 
             this.extraToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -194,6 +178,23 @@
             this.generateEllipsoidToolStripMenuItem.Size = new System.Drawing.Size(531, 38);
             this.generateEllipsoidToolStripMenuItem.Text = "Generate Ellipse Shp From Boundary Shp";
             this.generateEllipsoidToolStripMenuItem.Click += new System.EventHandler(this.generateEllipsoidToolStripMenuItem_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(261, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(19, 29);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "l";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Form1
             // 

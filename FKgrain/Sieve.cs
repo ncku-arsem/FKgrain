@@ -144,7 +144,7 @@ namespace FKgrain
         }
         public string SaveResult(string tfwpath)
         {
-            var svd  = Project.SaveFilePrompt("SaveAs", "All files (*.*)|*.*");
+            var svd  = Project.SaveFilePrompt("Save As", "All files (*.*)|*.*");
             if(svd.ShowDialog()== DialogResult.OK)
             {
                 string filename = svd.FileName;

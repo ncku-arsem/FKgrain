@@ -90,7 +90,7 @@ namespace FKgrain {
 
         private void zerocontourToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "Pick an DEM file";
+            openFileDialog1.Title = "Pick a DEM file";
             openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             string openfile, savefile;
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -119,7 +119,7 @@ namespace FKgrain {
 
         private void planerDetrendingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "Pick an DEM file";
+            openFileDialog1.Title = "Pick a DEM file";
             openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             string openfile, savefile;
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -145,7 +145,7 @@ namespace FKgrain {
 
         private void vGMToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "Pick an Detrended DEM file";
+            openFileDialog1.Title = "Pick a Detrended DEM file";
             openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             string openfile, savefile,modelsavefile;
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -156,7 +156,7 @@ namespace FKgrain {
             {
                 return;
             }
-            saveFileDialog1.Title = "Save VGM Result";
+            saveFileDialog1.Title = "Save Variogram Result";
             saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -166,7 +166,7 @@ namespace FKgrain {
             {
                 return;
             }
-            saveFileDialog1.Title = "Save VGM model Result";
+            saveFileDialog1.Title = "Save Variogram model Result";
             saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             saveFileDialog1.FileName = "";
             if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -182,7 +182,7 @@ namespace FKgrain {
 
         private void factorialKrigingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "Pick an Detrended DEM file";
+            openFileDialog1.Title = "Pick a Detrended DEM file";
             openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             string openfile, savefile, VGMmodel;
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -193,7 +193,7 @@ namespace FKgrain {
             {
                 return;
             }
-            openFileDialog1.Title = "Pick an VGM modeling file";
+            openFileDialog1.Title = "Pick a Variogram modeling file";
             openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             openFileDialog1.FileName = "";
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -204,7 +204,7 @@ namespace FKgrain {
             {
                 return;
             }
-            saveFileDialog1.Title = "Save Krigging Result";
+            saveFileDialog1.Title = "Save Kriging Result";
             saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -237,7 +237,7 @@ namespace FKgrain {
 
         private void zeroContourToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "Pick an Krigging file";
+            openFileDialog1.Title = "Pick a Kriging file";
             openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             string openfile, savefile;
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -248,7 +248,7 @@ namespace FKgrain {
             {
                 return;
             }
-            saveFileDialog1.Title = "Save Zero Contour Image";
+            saveFileDialog1.Title = "Save Zero-Contour Image";
             saveFileDialog1.Filter = "tif files (*.tif)|*.tif|All files (*.*)|*.*";
             if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -268,7 +268,7 @@ namespace FKgrain {
 
         private void dSMToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "Pick an DEM file";
+            openFileDialog1.Title = "Pick a DEM file";
             openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             string openfile;
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -284,7 +284,7 @@ namespace FKgrain {
 
         private void detrendDSMToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "Pick an Detrend DEM file";
+            openFileDialog1.Title = "Pick a Detrend DEM file";
             openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             string openfile;
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -300,7 +300,7 @@ namespace FKgrain {
 
         private void kriggingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "Pick an Factorial Result";
+            openFileDialog1.Title = "Pick a Kriging Result";
             openFileDialog1.Filter = "out files (*.out)|*.out|All files (*.*)|*.*";
             string openfile;
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -322,7 +322,7 @@ namespace FKgrain {
 
         private void zeroContourToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "Pick an zero contour image";
+            openFileDialog1.Title = "Select zero contour image";
             openFileDialog1.Filter = "tif files (*.tif)|*.tif|All files (*.*)|*.*";
             string openfile;
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -371,6 +371,11 @@ namespace FKgrain {
             }
             // send to go to create csv
             ExtraProgram.BoundaryShapeToEllipse(openfile, savefile);
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
         }
     }
 }
