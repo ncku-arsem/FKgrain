@@ -265,6 +265,7 @@ namespace FKgrain
         string rd = "Image";
         private void RedrawImage(object sender, EventArgs e)
         {
+
             if (CurrentImage == null)
                 return;
 
@@ -275,6 +276,7 @@ namespace FKgrain
             }
             PictureBox1.Image = c;
         }
+
         #region function Button
         private void button1_Click(object sender, EventArgs e)
         {
@@ -545,9 +547,16 @@ namespace FKgrain
             }
         }
 
-        private void label3_Click(object sender, EventArgs e)
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
+            trackBar1.Value =  (int)(numericUpDown1.Value * 255);
+            RedrawImage(sender, e);
+        }
 
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            numericUpDown1.Value = (decimal)(trackBar1.Value /255f);
+            RedrawImage(sender, e);
         }
     }
 }
