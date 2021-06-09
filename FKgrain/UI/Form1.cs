@@ -221,7 +221,9 @@ namespace FKgrain {
             string ParFilePath = Path.Combine(Directory.GetCurrentDirectory(), "factorialkriging", "fk_large.exe.par");
             string DetrendingDSMPath = Path.Combine(Directory.GetCurrentDirectory(), "factorialkriging", DetrendFileName);
             string FactorialResultPath = Path.Combine(Directory.GetCurrentDirectory(), "factorialkriging", FactorialResult);
+
             ExtraProgram.SetupHeaderForKriging(openfile, DetrendingDSMPath);
+
             // Create Par file
             ExtraProgram.CreateParFile(DetrendFileName, FactorialResult, VGMmodel, TemplateFilePath, ParFilePath,label1);
             //run program
@@ -232,7 +234,7 @@ namespace FKgrain {
                     File.Delete(savefile);
                 }
                 File.Copy(FactorialResultPath, savefile);
-            });
+            },false);
         }
 
         private void zeroContourToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -262,7 +264,7 @@ namespace FKgrain {
             ExtraProgram.GenerateSHPContour(openfile, savefile,label1,() => {
                 Bitmap zero = new Bitmap(savefile);
                 ExtraProgram.OpenPreviewForm(zero, "Zero-Level Contour");
-            });
+            },false);
       
         }
 

@@ -11,8 +11,8 @@ xvk.dat                          -file with jackknife data
 0                                -debugging level: 0,1,2,3
 kt3d.dbg                         -file for debugging output
 $(outname)                  -file for kriged output
-600    0.0   0.01                -nx,xmn,xsiz
-600    0.0   0.01                -ny,ymn,ysiz
+$(nx)    $(minx)   $(dx)                -nx,xmn,xsiz
+$(ny)    $(miny)   $(dy)                -ny,ymn,ysiz
 1    1.0    1.0                  -nz,zmn,zsiz
 1    1      1                    -x,y and z block discretization
 8    49                          -min, max data for kriging

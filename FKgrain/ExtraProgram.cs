@@ -67,6 +67,10 @@ namespace FKgrain
                 {
                     File.WriteAllText(outpath, "DetrendedDEM\n3\nx\ny\nz\n" + currentContent, encoding);
                 }
+                else
+                {
+                    File.WriteAllText(outpath, currentContent, encoding);
+                }
             }
         }
 
@@ -80,16 +84,19 @@ namespace FKgrain
             {
                 string line = krigResult[2 + columenum].Replace("      ", ",");
                 line = line.Replace("     ", ",");
+                line = line.Replace("    ", ",");
                 string[] colume = line.Split(',');
                 sx = float.Parse(colume[1]);
                 sy = float.Parse(colume[2]);
                 line = krigResult[krigResult.Length - 1].Replace("      ", ",");
                 line = line.Replace("     ", ",");
+                line = line.Replace("    ", ",");
                 colume = line.Split(',');
                 float ex = float.Parse(colume[1]);
                 float ey = float.Parse(colume[2]);
                 line = krigResult[krigResult.Length - 2].Replace("      ", ",");
                 line = line.Replace("     ", ",");
+                line = line.Replace("    ", ",");
                 colume = line.Split(',');
                 diff = Math.Abs(ex - float.Parse(colume[1]));
                 xsize = (int)((ex - sx) / diff) + 1;
@@ -100,6 +107,7 @@ namespace FKgrain
             {
                 string line = krigResult[i].Replace("      ", ",");
                 line = line.Replace("     ", ",");
+                line = line.Replace("    ", ",");
                 string[] colume = line.Split(',');
                 float x = float.Parse(colume[1]);
                 float y = float.Parse(colume[2]);
@@ -208,7 +216,7 @@ namespace FKgrain
         }
 
 
-        public static void GenerateSHPContour(string openfile, string savefile, Label label, Action OnDone)
+        public static void GenerateSHPContour(string openfile, string savefile, Label label, Action OnDone,bool wait = true)
         {
             string intemediatekrggingResult = Path.Combine(Directory.GetCurrentDirectory(), "zerocontour", "kriged_result_img.txt");
             ExtraProgram.ReformatKriggingResult(openfile, intemediatekrggingResult);
@@ -226,6 +234,10 @@ namespace FKgrain
                 ey = float.Parse(colume[1]);
                 colume = krigResult[krigResult.Length - 2].Split('\t');
                 diff = Math.Abs(ex - float.Parse(colume[0]));
+                if (diff == 0)
+                {
+                    diff = Math.Abs(ey - float.Parse(colume[1]));
+                }
                 xsize = (int)((ex - sx) / diff) + 1;
                 ysize = (int)((ey - sy) / diff) + 1;
             }
@@ -304,15 +316,19 @@ namespace FKgrain
                     File.Delete(intemediate);
                 });
                 backgroundWorker2.RunWorkerAsync();
+       
                 while (backgroundWorker2.IsBusy)
                 {
                     Thread.Sleep(100);
                 }
             });
             backgroundWorker1.RunWorkerAsync();
-            while (backgroundWorker1.IsBusy)
+            if (wait)
             {
-                Thread.Sleep(100);
+                while (backgroundWorker1.IsBusy)
+                {
+                    Thread.Sleep(100);
+                }
             }
         }
 
@@ -380,12 +396,67 @@ namespace FKgrain
             Par = Par.Replace("$(a_hmax2)", a_hmax2.ToString());
             Par = Par.Replace("$(filename)", DSMFile);
             Par = Par.Replace("$(outname)", ReusltFile);
+            //read DEM file , get number of x , get number of y
+            // get dx , dy
+            // get min x , min y
+            string[] dsm= File.ReadAllLines(Path.Combine(Directory.GetCurrentDirectory(),"factorialkriging", DSMFile));
+            int headersize = 5;
+            float minx = float.MaxValue;
+            float maxx = float.MinValue;
+            float miny = float.MaxValue;
+            float maxy = float.MinValue;
+            float dx = float.MaxValue;
+            float dy = float.MaxValue;
+            for (int j = headersize; j < dsm.Length; j++)
+            {
+                string[] coor = dsm[j].Split(' ');
+                if( coor .Length != 3)
+                {
+                    continue;
+                }
+                float x = float.Parse(coor[0]);
+                float y = float.Parse(coor[1]);
+                float z = float.Parse(coor[2]);
+                minx = Math.Min(x, minx);
+                miny = Math.Min(y, miny);
+                maxx = Math.Max(x, maxx);
+                maxy = Math.Max(y, maxy);
+                if (j != headersize)
+                {
+                    string[] lastcoor = dsm[j - 1].Split(' ');
+                    if (lastcoor.Length != 3)
+                    {
+                        continue;
+                    }
+                    float lx = float.Parse(lastcoor[0]);
+                    float ly = float.Parse(lastcoor[1]);
+                    float lz = float.Parse(lastcoor[2]);
+                    float ddx = Math.Abs(x - lx);
+                    float ddy = Math.Abs(y - ly);
+                    if (ddx != 0)
+                    {
+                        dx = (float)Math.Round(Math.Min(dx, ddx),2);
+                    }
+                    if (ddy != 0)
+                    {
+                        dy = (float)Math.Round(Math.Min(dy, ddy), 2);
+                    }
+                }
+
+            }
+
+            Par = Par.Replace("$(nx)", ((int)((maxx-minx)/dx)).ToString());
+            Par = Par.Replace("$(minx)", minx.ToString("0.000000"));
+            Par = Par.Replace("$(dx)", dx.ToString("0.000000"));
+            Par = Par.Replace("$(ny)", ((int)((maxy - miny) / dy)).ToString());
+            Par = Par.Replace("$(miny)", miny.ToString("0.000000"));
+            Par = Par.Replace("$(dy)", dy.ToString("0.000000"));
             //save par and return save path
             File.WriteAllText(ParFile, Par, encoding);
             return "";
         }
 
-        public static void FactorialKrigging(Label label, String resultPath, bool visuallize = false, Action<Label> onDone = null)
+        public static void FactorialKrigging(Label label, String resultPath, bool visuallize = false, Action<Label> onDone = null, bool wait = true)
         {
 
             BackgroundWorker backgroundWorker1 = new BackgroundWorker();
@@ -404,7 +475,7 @@ namespace FKgrain
                 process.StartInfo = startInfo;
                 process.Start();
                 process.WaitForExit();
-
+      
             });
 
             backgroundWorker1.RunWorkerCompleted += new RunWorkerCompletedEventHandler((a, ee) =>
@@ -428,9 +499,12 @@ namespace FKgrain
                 backgroundWorker1.Dispose();
             });
             backgroundWorker1.RunWorkerAsync();
-            while (backgroundWorker1.IsBusy)
+            if (wait)
             {
-                Thread.Sleep(100);
+                while (backgroundWorker1.IsBusy)
+                {
+                    Thread.Sleep(100);
+                }
             }
         }
 
@@ -582,18 +656,27 @@ namespace FKgrain
                 {
                     string line = krigResult[2 + columenum].Replace("      ", ",");
                     line = line.Replace("     ", ",");
+                    line = line.Replace("    ", ",");
                     string[] colume = line.Split(',');
                     sx = float.Parse(colume[1]);
                     sy = float.Parse(colume[2]);
                     line = krigResult[krigResult.Length - 1].Replace("      ", ",");
                     line = line.Replace("     ", ",");
+                    line = line.Replace("    ", ",");
                     colume = line.Split(',');
                     float ex = float.Parse(colume[1]);
                     float ey = float.Parse(colume[2]);
+                    
                     line = krigResult[krigResult.Length - 2].Replace("      ", ",");
                     line = line.Replace("     ", ",");
+                    line = line.Replace("    ", ",");
                     colume = line.Split(',');
                     diff = Math.Abs(ex - float.Parse(colume[1]));
+                    if(diff == 0)
+                    {
+                        diff = Math.Abs(ey - float.Parse(colume[2]));
+                    }
+                    
                     xsize = (int)((ex - sx) / diff) + 1;
                     ysize = (int)((ey - sy) / diff) + 1;
                     Local = new float[xsize, ysize];
@@ -609,6 +692,7 @@ namespace FKgrain
                 {
                     string line = krigResult[i].Replace("      ", ",");
                     line = line.Replace("     ", ",");
+                    line = line.Replace("    ", ",");
                     string[] colume = line.Split(',');
                     float x = float.Parse(colume[1]);
                     float y = float.Parse(colume[2]);
@@ -651,8 +735,9 @@ namespace FKgrain
                 }
                 return new Bitmap[] { PImage.NetArray2Bitmap(Localbi), PImage.NetArray2Bitmap(Regionbi), PImage.NetArray2Bitmap(Combinebi) };
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.ToString());
                 return null;
             }
         }

@@ -118,10 +118,9 @@ namespace FKgrain.UI
             BackgroundWorker worker = new BackgroundWorker();
             worker.DoWork += new DoWorkEventHandler((ss, eee) =>
             {
-                ExtraProgram.CreateParFile(DetrendFileName, FactorialResult, VGMModelFile, TemplateFilePath, ParFilePath, null);
                 ExtraProgram.SetupHeaderForKriging(DetrendingDSMPath);
+                ExtraProgram.CreateParFile(DetrendFileName, FactorialResult, VGMModelFile, TemplateFilePath, ParFilePath, null);
                 ExtraProgram.FactorialKrigging(null, FactorialResultPath);
-
 
             });
             worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler((ss, ee) =>
