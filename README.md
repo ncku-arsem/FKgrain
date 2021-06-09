@@ -30,6 +30,6 @@ Download Release Executable is in
 > https://github.com/ncku-arsem/FKgrain/releases/download/v0.86/FKgrain.zip
 
 
-More details please Check the manual [click here](dependency/UserManual.pdf)
+More details please Check the manual [click here](dependency/UsersManual.pdf)
 
 
