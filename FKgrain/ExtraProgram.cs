@@ -399,7 +399,7 @@ namespace FKgrain
             //read DEM file , get number of x , get number of y
             // get dx , dy
             // get min x , min y
-            string[] dsm= File.ReadAllLines(Path.Combine(Directory.GetCurrentDirectory(),"factorialkriging", DSMFile));
+            string[] dsm = File.ReadAllLines(Path.Combine(Directory.GetCurrentDirectory(), "factorialkriging", DSMFile));
             int headersize = 5;
             float minx = float.MaxValue;
             float maxx = float.MinValue;
@@ -410,7 +410,7 @@ namespace FKgrain
             for (int j = headersize; j < dsm.Length; j++)
             {
                 string[] coor = dsm[j].Split(' ');
-                if( coor .Length != 3)
+                if (coor.Length != 3)
                 {
                     continue;
                 }
@@ -435,7 +435,7 @@ namespace FKgrain
                     float ddy = Math.Abs(y - ly);
                     if (ddx != 0)
                     {
-                        dx = (float)Math.Round(Math.Min(dx, ddx),2);
+                        dx = (float)Math.Round(Math.Min(dx, ddx), 2);
                     }
                     if (ddy != 0)
                     {
@@ -445,12 +445,15 @@ namespace FKgrain
 
             }
 
-            Par = Par.Replace("$(nx)", ((int)((maxx-minx)/dx)).ToString());
+            Par = Par.Replace("$(nx)", ((int)((maxx - minx) / dx)).ToString());
             Par = Par.Replace("$(minx)", minx.ToString("0.000000"));
             Par = Par.Replace("$(dx)", dx.ToString("0.000000"));
             Par = Par.Replace("$(ny)", ((int)((maxy - miny) / dy)).ToString());
             Par = Par.Replace("$(miny)", miny.ToString("0.000000"));
             Par = Par.Replace("$(dy)", dy.ToString("0.000000"));
+            Par = Par.Replace("$(srx)", (dx * 20).ToString("0.000000"));
+            Par = Par.Replace("$(sry)", (dy * 20).ToString("0.000000"));
+            Par = Par.Replace("$(srz)", (dx * 20).ToString("0.000000"));
             //save par and return save path
             File.WriteAllText(ParFile, Par, encoding);
             return "";
