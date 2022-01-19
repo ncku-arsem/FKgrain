@@ -27,7 +27,7 @@ lirary(sp)
 
 Download Release Executable is in  
 
-> https://github.com/ncku-arsem/FKgrain/releases/download/v0.87/FKgrain.zip
+> https://github.com/ncku-arsem/FKgrain/releases/download/v1.1-alpha/FKgrain.rar
 
 
 More details please Check the manual [click here](dependency/UsersManual.pdf)
