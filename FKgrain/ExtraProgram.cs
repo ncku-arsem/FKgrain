@@ -553,33 +553,51 @@ namespace FKgrain
             float[,] Z;
             float diff, sx, sy;
             int xsize, ysize;
-            {
-                string[] colume = dsm[0].Split(' ');
-                sx = float.Parse(colume[0]);
-                sy = float.Parse(colume[1]);
-                colume = dsm[dsm.Length - 1].Split(' ');
-                float ex = float.Parse(colume[0]);
-                float ey = float.Parse(colume[1]);
-                colume = dsm[1].Split(' ');
-                diff = Math.Abs(sy - float.Parse(colume[1]));
-                xsize = (int)((ex - sx) / diff) + 1;
-                ysize = (int)((ey - sy) / diff) + 1;
-                Z = new float[xsize + 2, ysize + 2];
-            }
+            float maxx = float.MinValue;
+            float minx = float.MaxValue;
+            float maxy = float.MinValue;
+            float miny = float.MaxValue;
             float maxz = float.MinValue;
             float minz = float.MaxValue;
+            diff = float.MaxValue;
+            float lastx = float.Parse(dsm[0].Split(' ')[0]);
+            float lasty = float.Parse(dsm[0].Split(' ')[1]);
             for (int i = 0; i < dsm.Length; i++)
             {
                 string[] colume = dsm[i].Split(' ');
                 float x = float.Parse(colume[0]);
                 float y = float.Parse(colume[1]);
                 float z = float.Parse(colume[2]);
-                int xindex = (int)((x - sx) / diff);
-                int yindex = (int)((y - sy) / diff);
-                Z[xindex, yindex] = z;
-
+                maxx = Math.Max(x, maxx);
+                minx = Math.Min(x, minx);
+                maxy = Math.Max(y, maxy);
+                miny = Math.Min(y, miny);
                 maxz = Math.Max(z, maxz);
                 minz = Math.Min(z, minz);
+                if (x != lastx){
+                    diff = Math.Min(Math.Abs(x-lastx), diff);
+                }
+                if (y != lasty)
+                {
+                    diff = Math.Min(Math.Abs(y - lasty), diff);
+                }
+                lastx = x;
+                lasty = y;
+            }
+            xsize = (int)((maxx - minx) / diff) + 1;
+            ysize = (int)((maxy - miny) / diff) + 1;
+            Z = new float[xsize + 2, ysize + 2];
+            for (int i = 0; i < dsm.Length; i++)
+            {
+                string[] colume = dsm[i].Split(' ');
+                float x = float.Parse(colume[0]);
+                float y = float.Parse(colume[1]);
+                float z = float.Parse(colume[2]);
+                int xindex = (int)((x - minx) / diff);
+                int yindex = (int)((y - miny) / diff);
+                Z[xindex, yindex] = z;
+
+               
             }
             Color[,] bi = new Color[Z.GetLength(0), Z.GetLength(1)];
 
